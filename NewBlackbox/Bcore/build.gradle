@@ -16,7 +16,7 @@ android {
         prefab true
     }
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        minSdkVersion rootProject.ext.minSdk
 
         consumerProguardFiles "consumer-rules.pro"
         ndk {
