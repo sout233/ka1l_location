@@ -4,6 +4,8 @@
 
 当前无账号版本的改动、部署与验证方式见 [开放接口说明](open-api.md)。
 
+自动编译和发布说明见 [Android CI 与 Release](ci-release.md)。
+
 ## 文档索引
 
 | 文档 | 说明 | 适用读者 |

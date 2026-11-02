@@ -46,6 +46,9 @@ jobs:
           java-version: '21'
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
       - name: Install Android build tools
         run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0' 'ndk;29.0.13846066' 'cmake;3.22.1'
       - name: Set up Gradle
@@ -60,7 +63,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.android/kail-ci.keystore
-          key: kail-ci-signing-${{ github.repository_id }}-v1
+          key: kail-ci-signing-${{ github.repository_id }}-${{ matrix.name }}-v1
       - name: Sign and verify APK with CI test key
         env:
           PROJECT_DIR: ${{ matrix.project }}
