@@ -2,6 +2,8 @@
 
 `.github/workflows/android.yml` 在 main 推送、针对 main 的 PR、新建 `v*` 标签及手动触发时运行。Java 21、Android SDK 36、NDK 29.0.13846066、CMake 3.22.1 在 runner 上自动准备。
 
+编译前，CI 将主程序原生模块中的签名校验绑定到本次实际使用的证书，保留校验并避免沿用原项目证书。
+
 主程序和独立 Xposed 工程分别执行 `:app:testDebugUnitTest :app:assembleRelease`。成功后对 release APK 进行 zipalign、签名与 apksigner 验证，并上传 `KailLocation`、`KailLocationXposed` 两组 Actions artifacts，内含 APK 和 SHA-256 校验文件。测试报告单独上传。
 
 发布可选以下任一方式：

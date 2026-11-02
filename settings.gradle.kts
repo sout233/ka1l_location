@@ -1,18 +1,13 @@
 pluginManagement {
-    repositories {
-        maven { url = uri("https://www.jitpack.io") }
-        maven { url = uri("https://maven.aliyun.com/repository/releases") }
-        maven { url = uri("https://maven.aliyun.com/repository/google") }
-        maven { url = uri("https://maven.aliyun.com/repository/central") }
-        maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
-        maven { url = uri("https://maven.aliyun.com/repository/public") }
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "com.google.devtools.ksp" && requested.version != null) {
+                useModule("com.google.devtools.ksp:symbol-processing-gradle-plugin:${requested.version}")
             }
         }
+    }
+    repositories {
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -20,14 +15,12 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        maven { url = uri("https://www.jitpack.io") }
-        maven { url = uri("https://maven.aliyun.com/repository/releases") }
-        maven { url = uri("https://maven.aliyun.com/repository/google") }
-        maven { url = uri("https://maven.aliyun.com/repository/central") }
-        maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
-        maven { url = uri("https://maven.aliyun.com/repository/public") }
         google()
         mavenCentral()
+        maven {
+            url = uri("https://jitpack.io")
+            content { includeGroup("com.github.tiann") }
+        }
     }
 }
 

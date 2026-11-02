@@ -53,29 +53,39 @@ jobs:
         run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0' 'ndk;29.0.13846066' 'cmake;3.22.1'
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-      - name: Test and build release APK
-        working-directory: ${{ matrix.project }}
-        run: |
-          chmod +x gradlew
-          ./gradlew :app:testDebugUnitTest :app:assembleRelease --stacktrace --no-daemon --max-workers=2 -Dorg.gradle.jvmargs='-Xmx4g -Dfile.encoding=UTF-8'
       - name: Restore CI test signing key
         if: github.event_name != 'pull_request'
         uses: actions/cache@v4
         with:
           path: ~/.android/kail-ci.keystore
           key: kail-ci-signing-${{ github.repository_id }}-${{ matrix.name }}-v1
-      - name: Sign and verify APK with CI test key
+      - name: Prepare CI signing certificate
         env:
           PROJECT_DIR: ${{ matrix.project }}
-          APK_NAME: ${{ matrix.name }}
         run: |
-          mkdir -p "$HOME/.android" dist
+          mkdir -p "$HOME/.android"
           if [ ! -f "$HOME/.android/kail-ci.keystore" ]; then
             keytool -genkeypair -keystore "$HOME/.android/kail-ci.keystore" \
               -storepass android -keypass android -alias androiddebugkey \
               -dname 'CN=Kail CI Test,O=Open Source,C=US' \
               -keyalg RSA -keysize 2048 -validity 10000
           fi
+          if [ "$PROJECT_DIR" = '.' ]; then
+            keytool -exportcert -keystore "$HOME/.android/kail-ci.keystore" \
+              -storepass android -alias androiddebugkey -file "$RUNNER_TEMP/kail-ci.der"
+            python3 scripts/configure-signing-certificate.py "$RUNNER_TEMP/kail-ci.der"
+          fi
+      - name: Test and build release APK
+        working-directory: ${{ matrix.project }}
+        run: |
+          chmod +x gradlew
+          ./gradlew :app:testDebugUnitTest :app:assembleRelease --stacktrace --no-daemon --max-workers=2 -Dorg.gradle.jvmargs='-Xmx4g -Dfile.encoding=UTF-8'
+      - name: Sign and verify APK with CI test key
+        env:
+          PROJECT_DIR: ${{ matrix.project }}
+          APK_NAME: ${{ matrix.name }}
+        run: |
+          mkdir -p "$HOME/.android" dist
           tools="$ANDROID_HOME/build-tools/36.0.0"
           "$tools/zipalign" -f -p 4 "$PROJECT_DIR/app/build/outputs/apk/release/app-release-unsigned.apk" "dist/$APK_NAME-aligned.apk"
           "$tools/apksigner" sign --ks "$HOME/.android/kail-ci.keystore" \
