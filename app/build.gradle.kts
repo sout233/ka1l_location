@@ -1,3 +1,5 @@
+import java.net.URI
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -21,7 +23,7 @@ android {
 
         // Optional HTTPS directory serving notices.json and faqs.json.
         val contentUrl = providers.gradleProperty("OPEN_CONTENT_BASE_URL").orElse("").get()
-        val contentUri = runCatching { java.net.URI(contentUrl) }.getOrNull()
+        val contentUri = runCatching { URI(contentUrl) }.getOrNull()
         require(contentUrl.isEmpty() || (contentUri != null && contentUri.scheme == "https" &&
             !contentUri.host.isNullOrBlank() && contentUri.userInfo == null &&
             contentUri.query == null && contentUri.fragment == null &&
