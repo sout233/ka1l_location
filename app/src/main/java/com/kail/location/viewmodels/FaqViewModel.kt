@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.kail.location.network.RuoYiClient
+import com.kail.location.network.OpenContentClient
 import com.kail.location.utils.KailLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,14 +19,14 @@ class FaqViewModel(application: Application) : AndroidViewModel(application) {
 
     private companion object {
         const val TAG = "FaqViewModel"
-        const val PREF_NAME = "faq_cache"
+        const val PREF_NAME = "open_faq_cache"
         const val KEY_FAQS = "faq_list_json"
         const val KEY_UPDATED_AT = "faq_updated_at"
     }
 
     private val prefs = application.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-    var faqList by mutableStateOf<List<RuoYiClient.FaqItem>>(emptyList())
+    var faqList by mutableStateOf<List<OpenContentClient.FaqItem>>(emptyList())
         private set
     var loading by mutableStateOf(false)
         private set
@@ -51,7 +51,7 @@ class FaqViewModel(application: Application) : AndroidViewModel(application) {
         error = null
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
-                RuoYiClient.getFaqList()
+                OpenContentClient.getFaqList(getApplication())
             }
             result.fold(
                 onSuccess = { list ->
@@ -76,7 +76,7 @@ class FaqViewModel(application: Application) : AndroidViewModel(application) {
     fun retry() = loadFaqs()
 
     /** 读取本地缓存 */
-    private fun readCache(): List<RuoYiClient.FaqItem> {
+    private fun readCache(): List<OpenContentClient.FaqItem> {
         return runCatching {
             val json = prefs.getString(KEY_FAQS, null) ?: return emptyList()
             val arr = JSONArray(json)
@@ -84,7 +84,7 @@ class FaqViewModel(application: Application) : AndroidViewModel(application) {
                 for (i in 0 until arr.length()) {
                     val item = arr.getJSONObject(i)
                     add(
-                        RuoYiClient.FaqItem(
+                        OpenContentClient.FaqItem(
                             id = item.getLong("id"),
                             title = item.optString("title", ""),
                             answerMd = item.optString("answerMd", ""),
@@ -100,7 +100,7 @@ class FaqViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /** 保存本地缓存 */
-    private fun saveCache(list: List<RuoYiClient.FaqItem>) {
+    private fun saveCache(list: List<OpenContentClient.FaqItem>) {
         runCatching {
             val arr = JSONArray()
             list.forEach { item ->

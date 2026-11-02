@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 import com.kail.location.models.UpdateInfo
-import com.kail.location.network.RuoYiClient
+import com.kail.location.network.OpenContentClient
 import com.kail.location.utils.UpdateChecker
 import android.content.Intent
 import android.content.BroadcastReceiver
@@ -25,7 +25,7 @@ import com.kail.location.utils.MapUtils
 import com.kail.location.utils.GoUtils
 import com.kail.location.utils.KailLog
 import com.kail.location.utils.SimulationDiagnostics
-import com.kail.location.auth.UsageManager
+import com.kail.location.utils.SimulationReadiness
 import androidx.preference.PreferenceManager
 import android.database.sqlite.SQLiteDatabase
 import kotlinx.coroutines.Dispatchers
@@ -88,8 +88,8 @@ class LocationSimulationViewModel(application: Application) : AndroidViewModel(a
      */
     val updateInfo: StateFlow<UpdateInfo?> = _updateInfo.asStateFlow()
 
-    private val _noticeList = MutableStateFlow<List<RuoYiClient.NoticeInfo>>(emptyList())
-    val noticeList: StateFlow<List<RuoYiClient.NoticeInfo>> = _noticeList.asStateFlow()
+    private val _noticeList = MutableStateFlow<List<OpenContentClient.NoticeInfo>>(emptyList())
+    val noticeList: StateFlow<List<OpenContentClient.NoticeInfo>> = _noticeList.asStateFlow()
 
     private val _isDownloading = MutableStateFlow(false)
     val isDownloading: StateFlow<Boolean> = _isDownloading.asStateFlow()
@@ -182,16 +182,6 @@ class LocationSimulationViewModel(application: Application) : AndroidViewModel(a
         val next = !_isSimulating.value
         if (next) {
             viewModelScope.launch {
-                if (!UsageManager.canStartSimulation(app)) {
-                    KailLog.persist(app, SimulationDiagnostics.TAG,
-                        "位置模拟启动被拦截：未登录或免费次数用尽（canStartSimulation=false）", 'w')
-                    return@launch
-                }
-                if (!UsageManager.consumeSimulation(app)) {
-                    KailLog.persist(app, SimulationDiagnostics.TAG,
-                        "位置模拟启动被拦截：扣减模拟次数失败（consumeSimulation=false）", 'w')
-                    return@launch
-                }
                 val info = locationInfo.value
                 
                 // 关键修复：启动前强制同步一次最新的运行模式
@@ -201,16 +191,16 @@ class LocationSimulationViewModel(application: Application) : AndroidViewModel(a
                 // ROOT 模式靠 ptrace 注入 system_server；刚开机时注入会卡死/重启系统。
                 // 开机时长不足时拒绝启动并提示，避免设备卡死。
                 if (currentRunMode == "root") {
-                    val (ready, remainSec) = UsageManager.systemReadiness()
+                    val (ready, remainSec) = SimulationReadiness.systemReadiness()
                     if (!ready) {
                         KailLog.persist(app, SimulationDiagnostics.TAG,
                             "位置模拟启动被拦截：系统未就绪，开机仅 ${android.os.SystemClock.elapsedRealtime() / 1000}s，" +
-                                "需 ${UsageManager.bootReadyThresholdSeconds()}s（还需约 ${remainSec}s）", 'w')
+                                "需 ${SimulationReadiness.bootReadyThresholdSeconds()}s（还需约 ${remainSec}s）", 'w')
                         GoUtils.DisplayToast(
                             app,
                             app.getString(
                                 R.string.vm_system_not_ready,
-                                UsageManager.bootReadyThresholdSeconds(),
+                                SimulationReadiness.bootReadyThresholdSeconds(),
                                 remainSec
                             )
                         )
@@ -383,7 +373,7 @@ class LocationSimulationViewModel(application: Application) : AndroidViewModel(a
     fun checkAnnouncement() {
         viewModelScope.launch(Dispatchers.IO) {
             val dismissedKeys = readDismissedNoticeKeys()
-            RuoYiClient.getNoticeList().onSuccess { list ->
+            OpenContentClient.getNoticeList(getApplication()).onSuccess { list ->
                 _noticeList.value = list.filter { noticeKey(it) !in dismissedKeys }
             }
         }
@@ -397,7 +387,7 @@ class LocationSimulationViewModel(application: Application) : AndroidViewModel(a
         _noticeList.value = emptyList()
     }
 
-    private fun noticeKey(notice: RuoYiClient.NoticeInfo): String {
+    private fun noticeKey(notice: OpenContentClient.NoticeInfo): String {
         val contentHash = notice.content.hashCode().toLong() and 0xFFFFFFFFL
         return "${notice.id}:${notice.content.length}:$contentHash"
     }

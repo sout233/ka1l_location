@@ -1,122 +1,25 @@
 package com.kail.location.utils
 
 import android.content.Context
-import android.os.Build
 import com.kail.location.models.UpdateInfo
-import com.kail.location.network.RuoYiClient
+import com.kail.location.network.OpenContentClient
 import okhttp3.Request
 import org.json.JSONObject
-import java.net.URLDecoder
 
 object UpdateChecker {
     private const val TAG = "UpdateChecker"
     private const val OWNER = "noellegazelle6"
     private const val REPO = "kail_location"
     private const val GITHUB_API = "https://api.github.com/repos/$OWNER/$REPO/releases/latest"
-    private const val GITHUB_LATEST_DOWNLOAD = "https://github.com/$OWNER/$REPO/releases/latest/download/KailLocation.apk"
-    private const val APP_KEY = "KailLocation"
 
-    private val okHttpClient get() = RuoYiClient.okHttpClient
+    private val okHttpClient get() = OpenContentClient.okHttpClient
 
     fun check(context: Context, callback: (UpdateInfo?, String?) -> Unit) {
-        checkYudao(context, callback)
-    }
-
-    /**
-     * 后端（yudao app-api）为第一检查源。
-     * 仅在后端不可用（网络失败 / HTTP 错误 / 响应解析失败）时回退到 GitHub；
-     * 后端明确返回"无更新"时直接结束，避免两套来源的版本判断不一致。
-     */
-    private fun checkYudao(context: Context, callback: (UpdateInfo?, String?) -> Unit) {
-        val versionCode = getVersionCode(context)
-        if (versionCode <= 0L) {
-            checkGithub(context, callback)
-            return
-        }
-        val url = "${RuoYiClient.baseUrl}/infra/app-version/check?appKey=$APP_KEY&versionCode=$versionCode"
-        KailLog.i(context, TAG, "checkYudao: checking $url")
-        val request = Request.Builder()
-            .url(url)
-            .header("tenant-id", "1")
-            .build()
-        okHttpClient.newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: java.io.IOException) {
-                KailLog.w(context, TAG, "checkYudao: failed: ${e.message}, fallback to github")
-                checkGithub(context, callback)
-            }
-
-            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                if (!response.isSuccessful) {
-                    KailLog.w(context, TAG, "checkYudao: HTTP ${response.code}, fallback to github")
-                    response.close()
-                    checkGithub(context, callback)
-                    return
-                }
-                val res = response.body?.string()
-                response.close()
-                if (res == null) {
-                    checkGithub(context, callback)
-                    return
-                }
-                try {
-                    val json = JSONObject(res)
-                    val code = json.optInt("code", -1)
-                    val data = json.optJSONObject("data")
-                    if (code != 0 || data == null) {
-                        KailLog.w(context, TAG, "checkYudao: invalid response code=$code data=${data != null}, fallback to github")
-                        checkGithub(context, callback)
-                        return
-                    }
-                    if (!data.optBoolean("hasUpdate", false)) {
-                        KailLog.i(context, TAG, "checkYudao: backend reports no update")
-                        callback(null, null)
-                        return
-                    }
-                    val versionName = data.optString("versionName", "")
-                    val description = data.optString("description", "")
-                    val fileUrl = data.optString("fileUrl", "")
-                    val finalUrl = if (fileUrl.startsWith("http")) fileUrl else "${RuoYiClient.baseUrl.substringBefore("/app-api")}$fileUrl"
-                    val filename = decodeFilename(finalUrl)
-                    val info = UpdateInfo(
-                        version = versionName,
-                        content = description,
-                        downloadUrl = finalUrl,
-                        filename = filename,
-                        forceUpdate = data.optBoolean("forceUpdate", false),
-                        fileSize = data.optLong("fileSize", 0L),
-                        fallbackUrl = GITHUB_LATEST_DOWNLOAD,
-                        fallbackFilename = "KailLocation.apk"
-                    )
-                    KailLog.i(context, TAG, "checkYudao: update available $versionName")
-                    callback(info, null)
-                } catch (e: Exception) {
-                    KailLog.e(context, TAG, "checkYudao: parse error", e)
-                    checkGithub(context, callback)
-                }
-            }
-        })
+        checkGithub(context, callback)
     }
 
     private fun buildDownloadUrl(tagName: String): String {
         return "https://github.com/$OWNER/$REPO/releases/download/$tagName/KailLocation.apk"
-    }
-
-    /**
-     * 从下载地址提取文件名，处理 URL 编码与 query 参数。
-     */
-    private fun decodeFilename(url: String): String {
-        val raw = url.substringBefore('?').substringAfterLast('/')
-        val decoded = try {
-            URLDecoder.decode(raw, "UTF-8")
-        } catch (e: Exception) { raw }
-        return decoded.takeIf { it.isNotBlank() } ?: "KailLocation.apk"
-    }
-
-    private fun getVersionCode(context: Context): Long {
-        return try {
-            val info = context.packageManager.getPackageInfo(context.packageName, 0)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) info.longVersionCode else info.versionCode.toLong()
-        } catch (e: Exception) { 0L }
     }
 
     private fun getLocalVersionName(context: Context): String {
@@ -200,10 +103,11 @@ object UpdateChecker {
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
                 if (!response.isSuccessful) {
                     KailLog.w(context, TAG, "checkGithub: HTTP ${response.code}")
+                    response.close()
                     tryHeadCheck(context, callback)
                     return
                 }
-                val res = response.body?.string() ?: run {
+                val res = response.use { it.body?.string() } ?: run {
                     tryHeadCheck(context, callback); return
                 }
                 try {

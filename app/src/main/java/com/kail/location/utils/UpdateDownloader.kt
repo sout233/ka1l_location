@@ -2,7 +2,7 @@ package com.kail.location.utils
 
 import android.content.Context
 import com.kail.location.models.UpdateInfo
-import com.kail.location.network.RuoYiClient
+import com.kail.location.network.OpenContentClient
 import okhttp3.Request
 import java.io.File
 import java.io.FileOutputStream
@@ -10,7 +10,7 @@ import java.io.IOException
 
 /**
  * 应用安装包下载器。
- * 优先使用主下载地址（后端 fileUrl），失败或字节数与预期不符时自动回退到备用地址（GitHub）。
+ * 优先使用发布包下载地址，失败或字节数与预期不符时自动回退到备用地址（GitHub）。
  */
 object UpdateDownloader {
     private const val TAG = "UpdateDownloader"
@@ -61,7 +61,7 @@ object UpdateDownloader {
         onTotalKnown: (Boolean) -> Unit
     ): File {
         val request = Request.Builder().url(candidate.url).build()
-        val response = RuoYiClient.okHttpClient.newCall(request).execute()
+        val response = OpenContentClient.okHttpClient.newCall(request).execute()
         if (!response.isSuccessful) {
             response.close()
             throw IOException("HTTP ${response.code}")

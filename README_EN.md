@@ -1,5 +1,8 @@
 # Kail Location
 
+> This workspace edition removes account login, subscription payments and daily simulation quotas. Notices and FAQs use a self-hostable public JSON interface with bundled offline content. See [the interface guide](docs/open-api.md) for configuration and remaining third-party dependencies.
+
+
 > A spatial control deck for developers and professionals — route simulation, location simulation, navigation simulation, cadence simulation, virtual location, and NFC simulation.
 
 <p align="center">

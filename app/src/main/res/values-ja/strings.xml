@@ -147,7 +147,6 @@
     <string name="nav_menu_feedback">フィードバック</string>
     <string name="nav_menu_contact">作者に連絡</string>
     <string name="nav_app_tips">学習用途のみ。自己責任でご利用ください！</string>
-    <string name="nav_menu_sponsor">作者を支援</string>
     <string name="nav_menu_github">オープンソース</string>
     <string name="nav_menu_faq">よくある質問</string>
     <string name="faq_title">よくある質問</string>
@@ -164,8 +163,6 @@
     <string name="xposed_module_download_hint">Xposed モードを使用するには、KailLocation Xposed モジュールをインストールしてください。</string>
     <string name="xposed_module_download">ダウンロード</string>
     <string name="run_mode_changed">実行モードを %s に切り替えました</string>
-    <string name="sponsor_title">作者を支援</string>
-    <string name="sponsor_tron_note">TRON 資産のみ対応</string>
 
     <string name="label_longitude">経度</string>
     <string name="label_latitude">緯度</string>
@@ -373,15 +370,6 @@
     <string name="drawer_run_mode">実行モード</string>
     <string name="drawer_sandbox">サンドボックス エンジン</string>
     <string name="drawer_xposed_settings">Xposed 設定</string>
-    <string name="drawer_action_login">ログイン / 登録</string>
-    <string name="drawer_action_logout">ログアウト</string>
-    <string name="drawer_logged_in_as">ログイン中</string>
-    <string name="drawer_not_logged_in">未ログイン</string>
-
-    <string name="sponsor_copied">コピーしました</string>
-    <string name="sponsor_copy_address">アドレスをコピー</string>
-    <string name="sponsor_wechat_hint">以下のリンクをPCブラウザで開き、国を中国に選択してください</string>
-    <string name="sponsor_copy">コピー</string>
 
     <string name="welcome_read">読みました</string>
     <string name="welcome_and">と</string>
@@ -450,50 +438,16 @@
     <string name="setting_wlan_title">WLAN データをシミュレート</string>
     <string name="setting_wlan_summary">Wi‑Fi 測位データを偽装します</string>
 
-    <!-- Usage Manager -->
-    <string name="usage_not_logged_in">シミュレーションを使用するにはログインしてください</string>
-    <string name="usage_free_exhausted">本日の無料シミュレーション回数を使い切りました。購読すると無制限に利用できます。</string>
-    <string name="usage_count_exhausted">シミュレーション回数を使い切りました</string>
-
-    <!-- API Errors -->
-    <string name="api_error_remaining">残り回数の取得に失敗しました</string>
-    <string name="api_error_send_code">認証コードの送信に失敗しました</string>
-    <string name="api_error_login">ログインに失敗しました</string>
-    <string name="api_error_plans">プラン一覧の取得に失敗しました</string>
+<!-- API Errors -->
     <string name="api_error_notices">お知らせの取得に失敗しました</string>
-    <string name="api_error_subscription">購読状態の取得に失敗しました</string>
 
-    <!-- Sponsor Errors -->
-    <string name="sponsor_error_not_logged_in">ログインしていません</string>
-    <string name="sponsor_error_select_plan">プランを選択してください</string>
-    <string name="sponsor_error_create_checkout">チェックアウトの作成に失敗しました</string>
 
-    <!-- Sponsor Screen -->
-    <string name="sponsor_top_title">購読 &amp; スポンサー</string>
-    <string name="sponsor_member_title">メンバー購読</string>
-    <string name="sponsor_select_hint">プランを選択して全機能をアンロック</string>
-    <string name="sponsor_subscribed_text">購読中</string>
-    <string name="sponsor_thanks">ご支援ありがとうございます！</string>
-    <string name="sponsor_billing_once">一回限り</string>
-    <string name="sponsor_billing_month">/月</string>
-    <string name="sponsor_billing_year">/年</string>
-    <string name="sponsor_login_first">購読するにはログインしてください</string>
-    <string name="sponsor_credit_card">クレジット/デビットカード</string>
-    <string name="sponsor_wechat_pay">WeChat Pay</string>
-    <string name="sponsor_support_title">スポンサー</string>
-    <string name="sponsor_aptos_hint">Aptos チェーンでのスポンサーも受け付けています：</string>
-    <string name="sponsor_copy_aptos_address">Aptos アドレスをコピー</string>
 
-    <!-- Login Screen -->
-    <string name="login_hint_text">QQ メールと Gmail のみ対応。認証コードを入力してログインまたは自動登録。</string>
-    <string name="login_register_btn">ログイン / 登録</string>
 
-    <!-- Profile -->
-    <string name="profile_member_status">メンバーシップ状態</string>
-    <string name="profile_not_subscribed">未購読</string>
-    <string name="profile_subscribe_now">今すぐ購読</string>
 
-    <!-- Cell Simulation Screen -->
+
+
+<!-- Cell Simulation Screen -->
     <string name="cell_sim_empty_text">模擬基地局がありません</string>
     <string name="cell_sim_scan_hint">以下のボタンで基地局をスキャンまたは追加</string>
     <string name="cell_sim_deselect_all">全選択解除</string>
@@ -533,9 +487,7 @@
     <string name="ind_sim_stop_btn">独立模擬を停止</string>
     <string name="ind_sim_start_btn">独立模擬を開始</string>
 
-    <!-- Checkout WebView -->
-    <string name="checkout_title">チェックアウト</string>
-    <string name="checkout_back_desc">戻る</string>
+<string name="common_back_desc">戻る</string>
 
     <!-- Location Picker -->
     <string name="picker_map_init_failed">地図の初期化に失敗しました: %s</string>
@@ -625,34 +577,6 @@
     <string name="welcome_cannot_open_settings">設定画面を開けません。手動で有効にしてください。</string>
 
     <!-- Login / Register -->
-    <string name="login_screen_title">アカウント</string>
-    <string name="login_tab_login">ログイン</string>
-    <string name="login_tab_register">登録</string>
-    <string name="login_dialog_title">ログイン</string>
-    <string name="register_dialog_title">登録</string>
-    <string name="login_username_hint">ユーザー名</string>
-    <string name="login_email_hint">メールアドレス</string>
-    <string name="login_password_hint">パスワード</string>
-    <string name="register_nickname_hint">ニックネーム</string>
-    <string name="register_password_confirm_hint">パスワード確認</string>
-    <string name="register_verification_code_hint">認証コード</string>
-    <string name="register_send_code">送信</string>
-    <string name="login_action_login">ログイン</string>
-    <string name="login_action_register">登録</string>
-    <string name="login_forgot_password">パスワードをお忘れですか？</string>
-    <string name="login_error_empty_fields">必須項目を入力してください</string>
-    <string name="login_error_empty_email">メールアドレスを入力してください</string>
-    <string name="login_error_invalid_email_domain">QQメール（@qq.com）とGmail（@gmail.com）のみ対応しています。</string>
-    <string name="register_error_password_mismatch">パスワードが一致しません</string>
-    <string name="register_error_send_code_failed">認証コードの送信に失敗しました</string>
-    <string name="login_error_unknown">操作に失敗しました。後でもう一度お試しください</string>
-    <string name="forgot_password_title">パスワードをお忘れの場合</string>
-    <string name="forgot_password_description">メールアドレスと認証コードを入力してパスワードをリセットしてください。</string>
-    <string name="forgot_password_new_password_hint">新しいパスワード</string>
-    <string name="forgot_password_send">リセット</string>
-    <string name="forgot_password_success">パスワードをリセットしました</string>
-    <string name="forgot_password_failed">リセットに失敗しました。後でもう一度お試しください</string>
-    <string name="profile_title">プロフィール</string>
 
     <string name="loc_sim_title">位置シミュレーション</string>
     <string name="loc_sim_target">ターゲット位置</string>

@@ -11,7 +11,7 @@ import androidx.preference.PreferenceManager
 import com.kail.location.R
 import com.kail.location.service.Root.CameraSimController
 import com.kail.location.service.Root.CameraSimPusher
-import com.kail.location.auth.UsageManager
+import com.kail.location.utils.SimulationReadiness
 import com.kail.location.utils.KailLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -283,15 +283,12 @@ class CameraSimulationViewModel(application: Application) : AndroidViewModel(app
             pushConfigAndInject()
             return
         }
-        // Turning ON requires login + subscription/license (same as other sims).
         viewModelScope.launch {
-            if (!UsageManager.canStartSimulation(app)) return@launch
-            if (!UsageManager.consumeSimulation(app)) return@launch
             if (_runMode.value == "root") {
-                val (ready, remainSec) = UsageManager.systemReadiness()
+                val (ready, remainSec) = SimulationReadiness.systemReadiness()
                 if (!ready) {
                     android.widget.Toast.makeText(app,
-                        app.getString(R.string.vm_system_not_ready, UsageManager.bootReadyThresholdSeconds(), remainSec),
+                        app.getString(R.string.vm_system_not_ready, SimulationReadiness.bootReadyThresholdSeconds(), remainSec),
                         android.widget.Toast.LENGTH_SHORT).show()
                     return@launch
                 }

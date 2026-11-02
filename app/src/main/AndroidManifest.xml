@@ -218,19 +218,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name="com.kail.location.views.sponsor.SponsorActivity"
-            android:label="@string/sponsor_title"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" />
 
-        <activity
-            android:name="com.kail.location.views.sponsor.CheckoutWebViewActivity"
-            android:label="@string/sponsor_title"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.kail.location.views.nfcsimulation.NfcSimulationActivity"
@@ -289,17 +277,7 @@
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name="com.kail.location.views.auth.LoginActivity"
-            android:label="@string/login_screen_title"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name="com.kail.location.views.auth.ProfileActivity"
-            android:label="@string/profile_title"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Sandbox Mode -->
         <activity

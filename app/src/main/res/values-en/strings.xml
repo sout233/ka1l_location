@@ -169,7 +169,6 @@
     <string name="nav_menu_feedback">Feedback</string>
     <string name="nav_menu_contact">Contact</string>
     <string name="nav_app_tips">For learning purposes only. Use at your own risk!</string>
-    <string name="nav_menu_sponsor">Sponsor</string>
     <string name="nav_menu_github">Source Code</string>
     <string name="nav_menu_faq">FAQ</string>
     <string name="faq_title">FAQ</string>
@@ -186,8 +185,6 @@
     <string name="xposed_module_download_hint">Please install the KailLocation Xposed module to use Xposed mode.</string>
     <string name="xposed_module_download">Download</string>
     <string name="run_mode_changed">Run mode changed to %s</string>
-    <string name="sponsor_title">Sponsor</string>
-    <string name="sponsor_tron_note">TRON assets only</string>
 
     <string name="label_longitude">Longitude</string>
     <string name="label_latitude">Latitude</string>
@@ -403,18 +400,8 @@
     <string name="drawer_run_mode">Run Mode</string>
     <string name="drawer_sandbox">Sandbox Engine</string>
     <string name="drawer_xposed_settings">Xposed Settings</string>
-    <string name="drawer_action_login">Login / Register</string>
-    <string name="drawer_action_logout">Logout</string>
-    <string name="drawer_logged_in_as">Logged in as</string>
-    <string name="drawer_not_logged_in">Not logged in</string>
 
-    <!-- Sponsor -->
-    <string name="sponsor_copied">Copied</string>
-    <string name="sponsor_copy_address">Copy Address</string>
-    <string name="sponsor_wechat_hint">Open the link in a desktop browser, select country China</string>
-    <string name="sponsor_copy">Copy</string>
-
-    <!-- Welcome -->
+<!-- Welcome -->
     <string name="welcome_read">I have read</string>
     <string name="welcome_and">and</string>
     <string name="welcome_agreement_text">User Agreement</string>
@@ -492,50 +479,16 @@
     <string name="setting_wlan_title">Simulate WLAN Data</string>
     <string name="setting_wlan_summary">Forge WiFi positioning data</string>
 
-    <!-- Usage Manager -->
-    <string name="usage_not_logged_in">Please log in first to use simulation</string>
-    <string name="usage_free_exhausted">Free daily simulations exhausted. Subscribe for unlimited use.</string>
-    <string name="usage_count_exhausted">Simulation count exhausted</string>
-
-    <!-- API Errors -->
-    <string name="api_error_remaining">Failed to get remaining count</string>
-    <string name="api_error_send_code">Failed to send verification code</string>
-    <string name="api_error_login">Login failed</string>
-    <string name="api_error_plans">Failed to get plan list</string>
+<!-- API Errors -->
     <string name="api_error_notices">Failed to get notices</string>
-    <string name="api_error_subscription">Failed to get subscription status</string>
 
-    <!-- Sponsor Errors -->
-    <string name="sponsor_error_not_logged_in">Not logged in</string>
-    <string name="sponsor_error_select_plan">Please select a plan</string>
-    <string name="sponsor_error_create_checkout">Failed to create checkout</string>
 
-    <!-- Sponsor Screen -->
-    <string name="sponsor_top_title">Subscription &amp; Sponsorship</string>
-    <string name="sponsor_member_title">Member Subscription</string>
-    <string name="sponsor_select_hint">Choose a plan to unlock all features</string>
-    <string name="sponsor_subscribed_text">Subscribed</string>
-    <string name="sponsor_thanks">Thank you for your support!</string>
-    <string name="sponsor_billing_once">One-time</string>
-    <string name="sponsor_billing_month">/month</string>
-    <string name="sponsor_billing_year">/year</string>
-    <string name="sponsor_login_first">Please log in first to subscribe</string>
-    <string name="sponsor_credit_card">Credit/Debit Card</string>
-    <string name="sponsor_wechat_pay">WeChat Pay</string>
-    <string name="sponsor_support_title">Sponsorship</string>
-    <string name="sponsor_aptos_hint">You can also sponsor via Aptos chain:</string>
-    <string name="sponsor_copy_aptos_address">Copy Aptos Address</string>
 
-    <!-- Login Screen -->
-    <string name="login_hint_text">Only QQ email and Gmail supported. Enter verification code to login or auto-register.</string>
-    <string name="login_register_btn">Login / Register</string>
 
-    <!-- Profile -->
-    <string name="profile_member_status">Membership Status</string>
-    <string name="profile_not_subscribed">Not Subscribed</string>
-    <string name="profile_subscribe_now">Subscribe Now</string>
 
-    <!-- Cell Simulation Screen -->
+
+
+<!-- Cell Simulation Screen -->
     <string name="cell_sim_empty_text">No simulated cell towers</string>
     <string name="cell_sim_scan_hint">Scan or add cell towers below</string>
     <string name="cell_sim_deselect_all">Deselect All</string>
@@ -575,9 +528,7 @@
     <string name="ind_sim_stop_btn">Stop Independent Simulation</string>
     <string name="ind_sim_start_btn">Start Independent Simulation</string>
 
-    <!-- Checkout WebView -->
-    <string name="checkout_title">Checkout</string>
-    <string name="checkout_back_desc">Back</string>
+<string name="common_back_desc">Back</string>
 
     <!-- Location Picker -->
     <string name="picker_map_init_failed">Map initialization failed: %s</string>
@@ -666,37 +617,7 @@
     <!-- Welcome -->
     <string name="welcome_cannot_open_settings">Cannot open settings page, please enable manually</string>
 
-    <!-- Login / Register -->
-    <string name="login_screen_title">Account</string>
-    <string name="login_tab_login">Login</string>
-    <string name="login_tab_register">Register</string>
-    <string name="login_dialog_title">Login</string>
-    <string name="register_dialog_title">Register</string>
-    <string name="login_username_hint">Username</string>
-    <string name="login_email_hint">Email</string>
-    <string name="login_password_hint">Password</string>
-    <string name="register_nickname_hint">Nickname</string>
-    <string name="register_password_confirm_hint">Confirm Password</string>
-    <string name="register_verification_code_hint">Verification Code</string>
-    <string name="register_send_code">Send Code</string>
-    <string name="login_action_login">Login</string>
-    <string name="login_action_register">Register</string>
-    <string name="login_forgot_password">Forgot Password?</string>
-    <string name="login_error_empty_fields">Required fields cannot be empty</string>
-    <string name="login_error_empty_email">Email cannot be empty</string>
-    <string name="login_error_invalid_email_domain">Only QQ email (@qq.com) and Gmail (@gmail.com) are supported. Please use a different email.</string>
-    <string name="register_error_password_mismatch">Passwords do not match</string>
-    <string name="register_error_send_code_failed">Failed to send verification code</string>
-    <string name="login_error_unknown">Operation failed, please try again later</string>
-    <string name="forgot_password_title">Forgot Password</string>
-    <string name="forgot_password_description">Enter your email and verification code to reset your password.</string>
-    <string name="forgot_password_new_password_hint">New Password</string>
-    <string name="forgot_password_send">Reset Password</string>
-    <string name="forgot_password_success">Password reset successful</string>
-    <string name="forgot_password_failed">Reset failed, please try again later</string>
-    <string name="profile_title">Profile</string>
-
-    <!-- Location Simulation -->
+<!-- Location Simulation -->
     <string name="loc_sim_title">Location Simulation</string>
     <string name="loc_sim_target">Target Location</string>
     <string name="loc_sim_none">NONE</string>
@@ -870,4 +791,5 @@
     <string name="nav_sim_plan">Plan route</string>
     <string name="nav_sim_planned">Planned</string>
     <string name="nav_sim_plan_title">Set start and end point</string>
+    <string name="drawer_open_edition">Open edition · No account required</string>
 </resources>

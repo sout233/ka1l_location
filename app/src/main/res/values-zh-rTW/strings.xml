@@ -150,7 +150,6 @@
     <string name="nav_menu_feedback">問題回饋</string>
     <string name="nav_menu_contact">聯絡作者</string>
     <string name="nav_app_tips">僅供學習使用，否則後果自負！</string>
-    <string name="nav_menu_sponsor">贊助作者</string>
     <string name="nav_menu_github">開源倉庫</string>
     <string name="nav_menu_faq">常見問題</string>
     <string name="faq_title">常見問題</string>
@@ -167,8 +166,6 @@
     <string name="xposed_module_download_hint">請先安裝 KailLocation Xposed 模組才能使用 Xposed 模式。</string>
     <string name="xposed_module_download">前往下載</string>
     <string name="run_mode_changed">運行模式已切換為 %s</string>
-    <string name="sponsor_title">贊助作者</string>
-    <string name="sponsor_tron_note">僅支援 TRON 資產收款</string>
 
     <string name="label_longitude">經度</string>
     <string name="label_latitude">緯度</string>
@@ -375,15 +372,6 @@
     <string name="drawer_run_mode">運行模式</string>
     <string name="drawer_sandbox">沙盒引擎</string>
     <string name="drawer_xposed_settings">Xposed 設定</string>
-    <string name="drawer_action_login">登入 / 註冊</string>
-    <string name="drawer_action_logout">退出登入</string>
-    <string name="drawer_logged_in_as">已登入</string>
-    <string name="drawer_not_logged_in">未登入</string>
-
-    <string name="sponsor_copied">已複製</string>
-    <string name="sponsor_copy_address">複製地址</string>
-    <string name="sponsor_wechat_hint">將下方連結在電腦瀏覽器打開，國家選擇中國</string>
-    <string name="sponsor_copy">複製</string>
 
     <string name="welcome_read">已閱讀</string>
     <string name="welcome_and">和</string>
@@ -453,50 +441,16 @@
     <string name="setting_wlan_title">模擬 WLAN 資料</string>
     <string name="setting_wlan_summary">偽造 Wi‑Fi 定位資料</string>
 
-    <!-- Usage Manager -->
-    <string name="usage_not_logged_in">請先登入後再使用模擬功能</string>
-    <string name="usage_free_exhausted">今日免費模擬次數已用完，訂閱後可無限使用</string>
-    <string name="usage_count_exhausted">模擬次數已用完</string>
-
-    <!-- API Errors -->
-    <string name="api_error_remaining">獲取剩餘次數失敗</string>
-    <string name="api_error_send_code">發送驗證碼失敗</string>
-    <string name="api_error_login">登入失敗</string>
-    <string name="api_error_plans">獲取套餐列表失敗</string>
+<!-- API Errors -->
     <string name="api_error_notices">獲取公告失敗</string>
-    <string name="api_error_subscription">獲取訂閱狀態失敗</string>
 
-    <!-- Sponsor Errors -->
-    <string name="sponsor_error_not_logged_in">未登入</string>
-    <string name="sponsor_error_select_plan">請選擇套餐</string>
-    <string name="sponsor_error_create_checkout">建立結算頁面失敗</string>
 
-    <!-- Sponsor Screen -->
-    <string name="sponsor_top_title">訂閱與贊助</string>
-    <string name="sponsor_member_title">會員訂閱</string>
-    <string name="sponsor_select_hint">選擇套餐以解鎖全部功能</string>
-    <string name="sponsor_subscribed_text">已訂閱</string>
-    <string name="sponsor_thanks">感謝您的支援！</string>
-    <string name="sponsor_billing_once">一次性</string>
-    <string name="sponsor_billing_month">/月</string>
-    <string name="sponsor_billing_year">/年</string>
-    <string name="sponsor_login_first">請先登入後再訂閱</string>
-    <string name="sponsor_credit_card">信用卡/簽帳卡</string>
-    <string name="sponsor_wechat_pay">微信支付</string>
-    <string name="sponsor_support_title">贊助支援</string>
-    <string name="sponsor_aptos_hint">您也可以直接透過 Aptos 鏈贊助：</string>
-    <string name="sponsor_copy_aptos_address">複製 Aptos 地址</string>
 
-    <!-- Login Screen -->
-    <string name="login_hint_text">僅支援 QQ 郵箱與 Google 郵箱，輸入驗證碼即可登入或自動註冊</string>
-    <string name="login_register_btn">登入 / 註冊</string>
 
-    <!-- Profile -->
-    <string name="profile_member_status">會員狀態</string>
-    <string name="profile_not_subscribed">未訂閱</string>
-    <string name="profile_subscribe_now">訂閱會員</string>
 
-    <!-- Cell Simulation Screen -->
+
+
+<!-- Cell Simulation Screen -->
     <string name="cell_sim_empty_text">暫無模擬基地台</string>
     <string name="cell_sim_scan_hint">點擊下方按鈕掃描或新增基地台</string>
     <string name="cell_sim_deselect_all">取消全選</string>
@@ -536,9 +490,7 @@
     <string name="ind_sim_stop_btn">停止獨立模擬</string>
     <string name="ind_sim_start_btn">開始獨立模擬</string>
 
-    <!-- Checkout WebView -->
-    <string name="checkout_title">結帳</string>
-    <string name="checkout_back_desc">返回</string>
+<string name="common_back_desc">返回</string>
 
     <!-- Location Picker -->
     <string name="picker_map_init_failed">地圖初始化失敗: %s</string>
@@ -628,34 +580,6 @@
     <string name="welcome_cannot_open_settings">無法開啟設定頁面，請手動開啟</string>
 
     <!-- Login / Register -->
-    <string name="login_screen_title">帳戶</string>
-    <string name="login_tab_login">登入</string>
-    <string name="login_tab_register">註冊</string>
-    <string name="login_dialog_title">登入</string>
-    <string name="register_dialog_title">註冊</string>
-    <string name="login_username_hint">使用者名稱</string>
-    <string name="login_email_hint">郵箱地址</string>
-    <string name="login_password_hint">密碼</string>
-    <string name="register_nickname_hint">暱稱</string>
-    <string name="register_password_confirm_hint">確認密碼</string>
-    <string name="register_verification_code_hint">信箱驗證碼</string>
-    <string name="register_send_code">發送驗證碼</string>
-    <string name="login_action_login">登入</string>
-    <string name="login_action_register">註冊</string>
-    <string name="login_forgot_password">忘記密碼？</string>
-    <string name="login_error_empty_fields">必填項不能為空</string>
-    <string name="login_error_empty_email">郵箱不能為空</string>
-    <string name="login_error_invalid_email_domain">僅支援 QQ 郵箱（@qq.com）與 Google 郵箱（@gmail.com）登入</string>
-    <string name="register_error_password_mismatch">兩次輸入的密碼不一致</string>
-    <string name="register_error_send_code_failed">發送驗證碼失敗</string>
-    <string name="login_error_unknown">操作失敗，請稍後重試</string>
-    <string name="forgot_password_title">忘記密碼</string>
-    <string name="forgot_password_description">請輸入郵箱和驗證碼重設密碼。</string>
-    <string name="forgot_password_new_password_hint">新密碼</string>
-    <string name="forgot_password_send">重設密碼</string>
-    <string name="forgot_password_success">密碼重設成功</string>
-    <string name="forgot_password_failed">重設失敗，請稍後重試</string>
-    <string name="profile_title">個人主頁</string>
 
     <string name="loc_sim_title">位置模擬</string>
     <string name="loc_sim_target">目標位置</string>

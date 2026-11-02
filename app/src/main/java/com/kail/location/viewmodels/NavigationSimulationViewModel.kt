@@ -35,7 +35,6 @@ import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import com.kail.location.utils.KailLog
 import com.kail.location.utils.GoUtils
-import com.kail.location.auth.UsageManager
 import com.kail.location.models.UpdateInfo
 import com.kail.location.utils.UpdateChecker
 import android.content.Context
@@ -506,14 +505,7 @@ class NavigationSimulationViewModel(application: Application) : AndroidViewModel
      */
     fun startSimulation() {
         val route = _plannedRoute.value ?: return
-        val app = getApplication<Application>()
         viewModelScope.launch {
-            if (!UsageManager.canStartSimulation(app)) {
-                return@launch
-            }
-            if (!UsageManager.consumeSimulation(app)) {
-                return@launch
-            }
             addToHistory(_startPoint.value, _endPoint.value)
             startSimulationService(route)
         }

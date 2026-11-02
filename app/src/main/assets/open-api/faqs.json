@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "需要登录或付费吗？ / Do I need an account or subscription?",
+    "answerMd": "本版本无需注册、登录或订阅，模拟功能没有每日使用次数限制。设备权限、ROOT/Xposed 等运行条件仍需满足。\n\nThis edition requires no account or payment and has no daily usage quota. Device permissions and the selected run mode requirements still apply.",
+    "sort": 1
+  },
+  {
+    "id": 2,
+    "title": "没有网络可以使用吗？ / Does it work offline?",
+    "answerMd": "模拟启动不再依赖账号服务器。FAQ 自带离线内容；在线地图、地点搜索、路线规划、基站查询和更新下载仍需要网络，部分第三方服务还需要开发者自己的 API Key。\n\nSimulation startup is independent of an account server. FAQ content is bundled. Online maps, search, routing, cell lookups and update downloads still need network access, and some providers require your own API key.",
+    "sort": 2
+  },
+  {
+    "id": 3,
+    "title": "如何维护公告和帮助内容？ / How can I host content?",
+    "answerMd": "将 open-api 目录内的 JSON 文件部署到任意 HTTPS 静态服务器，并在构建时设置 OPEN_CONTENT_BASE_URL。接口格式和部署方法见仓库 docs/open-api.md；不配置时直接使用内置内容。\n\nServe the JSON files from any HTTPS static host and set OPEN_CONTENT_BASE_URL at build time. See docs/open-api.md for the public interface contract. Leave it empty to use bundled content only.",
+    "sort": 3
+  }
+]

@@ -30,7 +30,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.widget.Toast
 import com.baidu.mapapi.model.LatLng
-import com.kail.location.auth.UsageManager
+import com.kail.location.utils.SimulationReadiness
 import org.json.JSONObject
 import com.baidu.mapapi.search.core.SearchResult
 import com.baidu.mapapi.search.geocode.GeoCoder
@@ -342,16 +342,6 @@ class RouteSimulationViewModel(application: Application) : AndroidViewModel(appl
         if (_isStarting.value || _isSimulating.value) return
         viewModelScope.launch {
             val app = getApplication<Application>()
-            if (!UsageManager.canStartSimulation(app)) {
-                KailLog.persist(app, SimulationDiagnostics.TAG,
-                    "路线模拟启动被拦截：未登录或免费次数用尽（canStartSimulation=false）", 'w')
-                return@launch
-            }
-            if (!UsageManager.consumeSimulation(app)) {
-                KailLog.persist(app, SimulationDiagnostics.TAG,
-                    "路线模拟启动被拦截：扣减模拟次数失败（consumeSimulation=false）", 'w')
-                return@launch
-            }
 
             val pending = _pendingRoutePoints.value
             if (pending != null) {
@@ -395,14 +385,14 @@ class RouteSimulationViewModel(application: Application) : AndroidViewModel(appl
             // ROOT 模式靠 ptrace 注入 system_server；刚开机时注入会卡死/重启系统。
             // 开机时长不足时拒绝启动并提示，避免设备卡死。
             if (currentRunMode == "root") {
-                val (ready, remainSec) = UsageManager.systemReadiness()
+                val (ready, remainSec) = SimulationReadiness.systemReadiness()
                 if (!ready) {
                     KailLog.persist(app, SimulationDiagnostics.TAG,
                         "路线模拟启动被拦截：系统未就绪，开机仅 ${android.os.SystemClock.elapsedRealtime() / 1000}s，" +
-                            "需 ${UsageManager.bootReadyThresholdSeconds()}s（还需约 ${remainSec}s）", 'w')
+                            "需 ${SimulationReadiness.bootReadyThresholdSeconds()}s（还需约 ${remainSec}s）", 'w')
                     _toastMessage.value = app.getString(
                         R.string.vm_system_not_ready,
-                        UsageManager.bootReadyThresholdSeconds(),
+                        SimulationReadiness.bootReadyThresholdSeconds(),
                         remainSec
                     )
                     return@launch

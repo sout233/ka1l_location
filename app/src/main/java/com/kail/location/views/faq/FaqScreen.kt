@@ -27,7 +27,7 @@ import android.widget.TextView
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.view.setPadding
 import com.kail.location.R
-import com.kail.location.network.RuoYiClient
+import com.kail.location.network.OpenContentClient
 import com.kail.location.viewmodels.FaqViewModel
 import com.kail.location.views.common.BadgedControl
 import com.kail.location.views.common.HelpActionButton
@@ -59,7 +59,7 @@ fun FaqScreen(
                         IconButton(onClick = onBackClick) {
                             Icon(
                                 Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = stringResource(R.string.checkout_back_desc),
+                                contentDescription = stringResource(R.string.common_back_desc),
                                 tint = Color.White
                             )
                         }
@@ -161,7 +161,7 @@ fun FaqScreen(
 
 @Composable
 private fun FaqCard(
-    item: RuoYiClient.FaqItem,
+    item: OpenContentClient.FaqItem,
     expanded: Boolean,
     onToggle: () -> Unit,
     markwon: Markwon

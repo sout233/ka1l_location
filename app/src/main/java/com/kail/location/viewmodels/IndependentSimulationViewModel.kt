@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import com.kail.location.auth.UsageManager
 import com.kail.location.utils.KailLog
 
 /**
@@ -41,13 +40,6 @@ class IndependentSimulationViewModel(application: Application) : AndroidViewMode
     fun setEnabled(value: Boolean) {
         if (value) {
             viewModelScope.launch {
-                val app = getApplication<Application>()
-                if (!UsageManager.canStartSimulation(app)) {
-                    return@launch
-                }
-                if (!UsageManager.consumeSimulation(app)) {
-                    return@launch
-                }
                 doSetEnabled(true)
             }
         } else {

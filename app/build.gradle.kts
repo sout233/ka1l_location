@@ -18,14 +18,23 @@ android {
         versionCode = 46
         versionName = "1.7.2"
 
+        // Optional HTTPS directory serving notices.json and faqs.json.
+        val contentUrl = providers.gradleProperty("OPEN_CONTENT_BASE_URL").orElse("").get()
+        val contentUri = runCatching { java.net.URI(contentUrl) }.getOrNull()
+        require(contentUrl.isEmpty() || (contentUri != null && contentUri.scheme == "https" &&
+            !contentUri.host.isNullOrBlank() && contentUri.userInfo == null &&
+            contentUri.query == null && contentUri.fragment == null &&
+            contentUrl.none { it == '"' || it == '\\' || it.isWhitespace() })) {
+            "OPEN_CONTENT_BASE_URL must be empty or an HTTPS directory URL without credentials, query or fragment"
+        }
+        buildConfigField("String", "OPEN_CONTENT_BASE_URL", "\"$contentUrl\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
         ndk {
             abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
         }
 
-        buildConfigField("String", "ADMIN_API_URL", "\"https://adminkaillocation.kaillocation.xyz/admin-api\"")
-        buildConfigField("String", "APP_API_URL", "\"https://adminkaillocation.kaillocation.xyz/app-api\"")
     }
 
     externalNativeBuild {
@@ -464,6 +473,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-process:2.8.3")
     
     testImplementation(libs.junit)
+    testImplementation("org.json:json:20240303")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.os.SystemClock
 import androidx.preference.PreferenceManager
-import com.kail.location.auth.UsageManager
+import com.kail.location.utils.SimulationReadiness
 
 /**
  * SimulationDiagnostics —— 模拟启动诊断收集器。
@@ -131,7 +131,7 @@ class SimulationDiagnostics private constructor(
             r.contains("ROOT") || r.contains("su ") || r.contains("授权") ->
                 "在 KernelSU/Magisk 管理器里给 KailLocation 授予 ROOT 权限后重试。"
             r.contains("开机") || r.contains("就绪") ->
-                "刚开机系统未稳定，等开机满 ${UsageManager.bootReadyThresholdSeconds()}s 后再开始模拟。"
+                "刚开机系统未稳定，等开机满 ${SimulationReadiness.bootReadyThresholdSeconds()}s 后再开始模拟。"
             r.contains("watchdog") || r.contains("超时") ->
                 "注入超时多因 system_server 繁忙或刚开机；稍候重试，仍失败则重启设备后再试。"
             r.contains("缺失") || r.contains("部署") ->
@@ -203,11 +203,11 @@ class SimulationDiagnostics private constructor(
 
     /** 开机就绪：root 模式注入要求开机已超过阈值，否则 system_server 未稳定易卡死。 */
     fun checkBootReady(): Boolean {
-        val (ready, remainSec) = UsageManager.systemReadiness()
+        val (ready, remainSec) = SimulationReadiness.systemReadiness()
         step(
             "开机就绪",
             ready,
-            if (ready) "开机已超过 ${UsageManager.bootReadyThresholdSeconds()}s"
+            if (ready) "开机已超过 ${SimulationReadiness.bootReadyThresholdSeconds()}s"
             else "刚开机，还需等待约 ${remainSec}s（此时注入易卡死/重启）"
         )
         return ready

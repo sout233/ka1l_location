@@ -157,7 +157,6 @@
     <string name="nav_menu_feedback">问题反馈</string>
     <string name="nav_menu_contact">联系作者</string>
     <string name="nav_app_tips">仅供学习使用，否则后果自负!</string>
-    <string name="nav_menu_sponsor">赞助作者</string>
     <string name="nav_menu_github">开源仓库</string>
     <string name="nav_menu_faq">常见问题</string>
     <string name="faq_title">常见问题</string>
@@ -176,8 +175,6 @@
     <string name="xposed_module_version_mismatch">Xposed 模块版本不匹配</string>
     <string name="xposed_module_version_hint">Xposed 模块版本与当前应用版本不兼容，请更新后再使用。</string>
     <string name="run_mode_changed">运行模式已切换为 %s</string>
-    <string name="sponsor_title">赞助作者</string>
-    <string name="sponsor_tron_note">仅支持 TRON 资产收款</string>
 
     <!-- 主界面 -->
     <string name="label_longitude">经度</string>
@@ -564,39 +561,9 @@
     <string name="nfc_sim_opened">已打开: %s</string>
     <string name="nfc_sim_need_nfc">请先开启NFC</string>
 
-    <!-- Login -->
-    <string name="login_screen_title">账户</string>
-    <string name="login_tab_login">登录</string>
-    <string name="login_tab_register">注册</string>
-    <string name="login_dialog_title">登录</string>
-    <string name="register_dialog_title">注册</string>
-    <string name="login_username_hint">用户名</string>
-    <string name="login_email_hint">邮箱地址</string>
-    <string name="login_password_hint">密码</string>
-    <string name="register_nickname_hint">昵称</string>
-    <string name="register_password_confirm_hint">确认密码</string>
-    <string name="register_verification_code_hint">邮箱验证码</string>
-    <string name="register_send_code">发送验证码</string>
-    <string name="login_action_login">登录</string>
-    <string name="login_action_register">注册</string>
-    <string name="login_forgot_password">忘记密码？</string>
-    <string name="login_error_empty_fields">必填项不能为空</string>
-    <string name="login_error_empty_email">邮箱不能为空</string>
-    <string name="login_error_invalid_email_domain">仅支持 QQ 邮箱（@qq.com）与谷歌邮箱（@gmail.com）登录，请更换邮箱后重试</string>
-    <string name="register_error_password_mismatch">两次输入的密码不一致</string>
-    <string name="register_error_send_code_failed">发送验证码失败</string>
-    <string name="login_error_unknown">操作失败，请稍后重试</string>
-    <string name="forgot_password_title">忘记密码</string>
-    <string name="forgot_password_description">请输入邮箱和验证码重置密码。</string>
-    <string name="forgot_password_new_password_hint">新密码</string>
-    <string name="forgot_password_send">重置密码</string>
-    <string name="forgot_password_success">密码重置成功</string>
-    <string name="forgot_password_failed">重置失败，请稍后重试</string>
 
-    <!-- Profile -->
-    <string name="profile_title">个人主页</string>
 
-    <!-- Common -->
+<!-- Common -->
     <string name="common_warning">警告</string>
     <string name="common_delete_all_confirm">确定要删除全部历史记录吗?</string>
     <string name="common_delete_item_confirm">确定要删除该项历史记录吗?</string>
@@ -615,18 +582,8 @@
     <string name="drawer_run_mode">运行模式</string>
     <string name="drawer_sandbox">沙盒引擎</string>
     <string name="drawer_xposed_settings">Xposed 设置</string>
-    <string name="drawer_action_login">登录/注册</string>
-    <string name="drawer_action_logout">退出登录</string>
-    <string name="drawer_logged_in_as">已登录</string>
-    <string name="drawer_not_logged_in">未登录</string>
 
-    <!-- Sponsor -->
-    <string name="sponsor_copied">已复制</string>
-    <string name="sponsor_copy_address">复制地址</string>
-    <string name="sponsor_wechat_hint">将下方连接在电脑浏览器打开，国家选择中国</string>
-    <string name="sponsor_copy">复制</string>
-
-    <!-- Welcome -->
+<!-- Welcome -->
     <string name="welcome_read">已阅读</string>
     <string name="welcome_and">和</string>
     <string name="welcome_agreement_text">《用户协议》</string>
@@ -705,51 +662,16 @@
     <string name="setting_wlan_title">模拟 WLAN 数据</string>
     <string name="setting_wlan_summary">伪造 WiFi 定位数据</string>
 
-    <!-- Usage Manager -->
-    <string name="usage_not_logged_in">请先登录后再使用模拟功能</string>
-    <string name="usage_free_exhausted">今日免费模拟次数已用完，订阅后可无限使用</string>
-    <string name="usage_count_exhausted">模拟次数已用完</string>
-
-    <!-- API Errors -->
-    <string name="api_error_remaining">获取剩余次数失败</string>
-    <string name="api_error_send_code">发送验证码失败</string>
-    <string name="api_error_login">登录失败</string>
-    <string name="api_error_plans">获取套餐列表失败</string>
+<!-- API Errors -->
     <string name="api_error_notices">获取公告失败</string>
-    <string name="api_error_subscription">获取订阅状态失败</string>
 
-    <!-- Sponsor Errors -->
-    <string name="sponsor_error_not_logged_in">未登录</string>
-    <string name="sponsor_error_select_plan">请选择套餐</string>
-    <string name="sponsor_error_create_checkout">创建结算页面失败</string>
 
-    <!-- Sponsor Screen -->
-    <string name="sponsor_top_title">订阅与赞助</string>
-    <string name="sponsor_member_title">会员订阅</string>
-    <string name="sponsor_select_hint">选择套餐以解锁全部功能</string>
-    <string name="sponsor_subscribed_text">已订阅</string>
-    <string name="sponsor_thanks">感谢您的支持！</string>
-    <string name="sponsor_billing_once">一次性</string>
-    <string name="sponsor_billing_month">/月</string>
-    <string name="sponsor_billing_year">/年</string>
-    <string name="sponsor_login_first">请先登录后再订阅</string>
-    <string name="sponsor_credit_card">信用卡/银行卡</string>
-    <string name="sponsor_wechat_pay">微信支付</string>
-    <string name="sponsor_go_pay">去支付</string>
-    <string name="sponsor_support_title">赞助支持</string>
-    <string name="sponsor_aptos_hint">您也可以直接通过 Aptos 链赞助：</string>
-    <string name="sponsor_copy_aptos_address">复制 Aptos 地址</string>
 
-    <!-- Login Screen -->
-    <string name="login_hint_text">仅支持 QQ 邮箱与谷歌邮箱，输入验证码即可登录或自动注册</string>
-    <string name="login_register_btn">登录 / 注册</string>
 
-    <!-- Profile -->
-    <string name="profile_member_status">会员状态</string>
-    <string name="profile_not_subscribed">未订阅</string>
-    <string name="profile_subscribe_now">订阅会员</string>
 
-    <!-- Cell Simulation Screen -->
+
+
+<!-- Cell Simulation Screen -->
     <string name="cell_sim_empty_text">暂无模拟基站</string>
     <string name="cell_sim_scan_hint">点击下方按钮扫描或添加基站</string>
     <string name="cell_sim_deselect_all">取消全选</string>
@@ -789,9 +711,7 @@
     <string name="ind_sim_stop_btn">停止独立模拟</string>
     <string name="ind_sim_start_btn">开始独立模拟</string>
 
-    <!-- Checkout WebView -->
-    <string name="checkout_title">结账</string>
-    <string name="checkout_back_desc">返回</string>
+<string name="common_back_desc">返回</string>
 
     <!-- Location Picker -->
     <string name="picker_map_init_failed">地图初始化失败: %s</string>
@@ -879,4 +799,5 @@
 
     <!-- Welcome -->
     <string name="welcome_cannot_open_settings">无法打开设置页面，请手动开启</string>
+    <string name="drawer_open_edition">开源版 · 无需登录</string>
 </resources>

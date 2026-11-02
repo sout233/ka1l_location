@@ -46,11 +46,11 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.kail.location.R
-import com.kail.location.network.RuoYiClient
+import com.kail.location.network.OpenContentClient
 
 @Composable
 fun AnnouncementDialog(
-    notices: List<RuoYiClient.NoticeInfo>,
+    notices: List<OpenContentClient.NoticeInfo>,
     onDismiss: () -> Unit
 ) {
     if (notices.isEmpty()) return
