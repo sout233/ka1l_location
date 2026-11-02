@@ -10,6 +10,7 @@ plugins {
 android {
     namespace = "com.kail.location"
     compileSdk = 36
+    ndkVersion = "29.0.13846066"
 
     defaultConfig {
         applicationId = "com.kail.location"
@@ -40,6 +41,7 @@ android {
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
         }
     }
 

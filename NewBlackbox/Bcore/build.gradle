@@ -4,6 +4,7 @@ android {
     namespace 'top.niunaijun.blackbox'
 
     compileSdk rootProject.ext.compileSdkVersion
+    ndkVersion "29.0.13846066"
 
 
     aidlPackagedList "android/app/IServiceConnection.aidl"
@@ -15,7 +16,7 @@ android {
         prefab true
     }
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdk
+        minSdkVersion rootProject.ext.minSdkVersion
 
         consumerProguardFiles "consumer-rules.pro"
         ndk {
@@ -35,7 +36,6 @@ android {
         ndkBuild {
             path 'src/main/cpp/Android.mk'
         }
-        ndkVersion = "29.0.13846066"
     }
 
     compileOptions {
